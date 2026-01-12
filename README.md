@@ -22,3 +22,4 @@ php artisan make:model Page -m
 - Route
 - Controller
 - Resource# banalai
+# banalai
