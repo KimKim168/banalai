@@ -30,17 +30,16 @@ export default function ProductsSection() {
                     {productData?.children?.map((item, index) => (
                         <div
                             key={item?.id}
-                            className="rounded-xl border border-gray-100 bg-white p-8 shadow-md transition hover:shadow-xl"
+                            className="rounded-xl border bg-blue-50 border-gray-100 p-8 shadow-md transition hover:shadow-xl"
                         >
                             {/* Icon */}
                             <div
-                                className={`mb-4 flex h-16 w-16 items-center justify-center rounded-lg 
-                                ${imgBgColors[index % imgBgColors.length]}`}
+                                className={`mb-4 flex h-16 w-16 items-center justify-center rounded-lg`}
                             >
                                 <img
                                     src={`/assets/images/pages/${item?.icon}`}
                                     alt={item?.name}
-                                    className="h-10 w-10 object-contain"
+                                    className="h-full w-full object-contain"
                                 />
                             </div>
 

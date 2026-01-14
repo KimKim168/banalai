@@ -23,27 +23,36 @@ class BanalaiFrontPageController extends Controller
      */
     public function index()
     {
-        $categoryWithPostsData = PostCategory::with(['posts' => function ($query) {
-            $query->orderBy('created_at', 'desc')
-                ->select(['id', 'category_code', 'thumbnail', 'title', 'title_kh', 'short_description', 'short_description_kh']) // include FK and PK
-                ->limit(6);
-        }])
-            ->orderBy('order_index')
-            ->orderBy('name')
-            ->get();
 
+        $hero = Page::where('code', 'home')->with('images')->first();
         $productData = Page::where('code', 'products')->with('children')->first();
-        // return ($productData);
+        // return ($hero);
         return Inertia::render('Banalai/Index', [
+            'hero' => $hero,
             'productData' => $productData,
         ]);
     }
 
     public function about()
     {
-        $aboutData = Page::where('code', 'about')->with('images')->first();
-        return Inertia::render('Buddhist/About', [
-            'aboutData' => $aboutData,
+        $aboutHeader = Page::where('code', 'about')->first();
+        $ourMission = Page::where('code', 'our-mission')->with('children.images')->first();
+        $ourStory = Page::where('code', 'our-story')->first();
+        $ourCoreValueData = Page::where('code', 'our-core-values')->with('children.images')->first();
+        // return $ourMission;
+        return Inertia::render('Banalai/About', [
+            'aboutHeader' => $aboutHeader,
+            'ourMission' => $ourMission,
+            'ourStory' => $ourStory,
+            'ourCoreValueData' => $ourCoreValueData,
+        ]);
+    }
+    public function support()
+    {
+        $supportData = Page::where('code', 'support')->with('children.images')->first();
+        // return $supportData;
+        return Inertia::render('Banalai/Supoort', [
+            'supportData' => $supportData,
         ]);
     }
 

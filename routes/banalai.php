@@ -10,13 +10,10 @@ Route::get('/products', [BanalaiFrontPageController::class, 'products']);
 
 Route::get('/pricing', [BanalaiFrontPageController::class, 'pricing']);
 
-Route::get('/about', function () {
-    return Inertia::render('Banalai/About');
-});
+Route::get('/about', [BanalaiFrontPageController::class, 'about']);
 
-Route::get('/support', function () {
-    return Inertia::render('Banalai/Supoort');
-});
+Route::get('/support', [BanalaiFrontPageController::class, 'support']);
+
 
 Route::get('/banalai_register', function () {
     return Inertia::render('Banalai/Register');

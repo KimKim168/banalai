@@ -8,12 +8,13 @@ const imgBgColors = [
   "bg-blue-500",
 ];
 
-export default function FeaturesSection({ features }) {
+export default function OurCoreValueData({ features }) {
   return (
     <div>
-       <section className="px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-12 text-center">
+          {features?.title}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -23,12 +24,14 @@ export default function FeaturesSection({ features }) {
               className="p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow border border-gray-100 flex flex-col"
             >
               <div
-                className={`w-18 h-18 mb-4 rounded-lg flex items-center justify-center`}
+                className={`w-12 h-12 mb-4 rounded-lg flex items-center justify-center ${
+                  imgBgColors[index % imgBgColors.length]
+                }`}
               >
                 <img
                   src={`/assets/images/pages/${item?.icon}`}
                   alt={item.title}
-                  className="w-full h-full object-cover"
+                  className="w-8 h-8 object-contain"
                 />
               </div>
 
