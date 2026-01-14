@@ -1,4 +1,4 @@
-const Login = () => {
+const BanalaiLogin = () => {
     const imgBgColors = [
         'bg-yellow-500/30 border border-yellow-400/30',
         'bg-green-500/30 border border-green-400/30',
@@ -247,4 +247,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default BanalaiLogin;

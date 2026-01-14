@@ -1,4 +1,5 @@
 import React from "react";
+import LibrarySearch from "../Search/LibrarySearch";
 
 const imgBgColors = [
   "bg-purple-500",
@@ -9,7 +10,8 @@ const imgBgColors = [
 
 export default function FeaturesSection({ features }) {
   return (
-    <section className="px-4 sm:px-6 lg:px-8 bg-white">
+    <div>
+      <section className="px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-12 text-center">
           {features.title}
@@ -45,5 +47,6 @@ export default function FeaturesSection({ features }) {
         </div>
       </div>
     </section>
+    </div>
   );
 }

@@ -10,7 +10,7 @@ interface LayoutProps {
 const BanalaiLayout = ({ children }: LayoutProps) => {
 
     return (
-        <div>
+        <div className='bg-white'>
             <BanalaiNav />
             <main className="mx-auto w-full flex-1 min-h-svh">{children}</main>
             <BanalaiFooter />

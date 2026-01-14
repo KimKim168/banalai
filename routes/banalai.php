@@ -1,19 +1,14 @@
 <?php
 
+use App\Http\Controllers\BanalaiFrontPageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Banalai/Index');
-});
+Route::get('/', [BanalaiFrontPageController::class, 'index']);
 
-Route::get('/products', function () {
-    return Inertia::render('Banalai/Products');
-});
+Route::get('/products', [BanalaiFrontPageController::class, 'products']);
 
-Route::get('/pricing', function () {
-    return Inertia::render('Banalai/Pricing');
-});
+Route::get('/pricing', [BanalaiFrontPageController::class, 'pricing']);
 
 Route::get('/about', function () {
     return Inertia::render('Banalai/About');
@@ -23,10 +18,10 @@ Route::get('/support', function () {
     return Inertia::render('Banalai/Supoort');
 });
 
-Route::get('/register', function () {
+Route::get('/banalai_register', function () {
     return Inertia::render('Banalai/Register');
 });
 
-Route::get('/login', function () {
-    return Inertia::render('Banalai/Login');
+Route::get('/banalai_login', function () {
+    return Inertia::render('Banalai/BanalaiLogin');
 });

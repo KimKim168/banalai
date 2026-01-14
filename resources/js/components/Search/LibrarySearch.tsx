@@ -51,7 +51,7 @@ const LibrarySearch = ({ debounceSearch = true }: LibrarySearchProps) => {
     };
 
     return (
-        <div className="relative mx-auto w-full max-w-2xl">
+        <div className="relative mx-auto w-full max-w-7xl">
             <div
                 className={cn(
                     'flex items-center rounded-full border border-primary bg-muted p-2 ring-primary/20 transition-colors focus-within:ring-4 dark:ring-primary/50',

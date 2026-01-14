@@ -39,7 +39,7 @@ export default function FreePlanSection() {
         </div>
 
         <a
-          href="/register"
+          href="/banalai_register"
           className="inline-block px-8 py-4 bg-[linear-gradient(88deg,#22c55e,#21c15c,#1fbd59,#1eb857,#1cb454,#1bb052,#19ac4f,#18a74d,#16a34a)] text-white rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
           Get Started Free

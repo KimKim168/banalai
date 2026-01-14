@@ -1,6 +1,7 @@
 import FeaturesSection from '@/components/Banalai/FeaturesSection';
 import FreePlanSection from '@/components/Banalai/FreePlanSection';
 import HeroBanalai from '@/components/Banalai/HeroBanalai';
+import LibrarySearch from '@/components/Search/LibrarySearch';
 import BanalaiLayout from './Layout';
 
 const Index = () => {
@@ -32,6 +33,8 @@ const Index = () => {
     return (
         <BanalaiLayout>
             <HeroBanalai />
+            <LibrarySearch />
+
             <FeaturesSection features={features} />
             <div className="mt-20">
                 <FreePlanSection />

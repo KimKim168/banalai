@@ -21,7 +21,7 @@ const HeroBanalai = () => {
 
                         <div className="mb-12 flex flex-col gap-4 sm:flex-row">
                             <Link
-                                href="/register"
+                                href="/banalai_register"
                                 className="w-full rounded-lg bg-[linear-gradient(88deg,#155dfc,#1c59fb,#2454fb,#2b50fa,#324bf9,#3947f8,#4142f8,#483ef7,#4f39f6,#5834f7,#612ff7,#6a2af8,#7425f8,#7d1ff9,#861af9,#8f15fa,#9810fa)] px-8 py-4 text-center font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl sm:w-auto"
                             >
                                 Get Started
