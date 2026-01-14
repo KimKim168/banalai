@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/react';
 import AboutBanalai from './AboutBanalai';
 import BanalaiLayout from './Layout';
 import StorySection from './StorySection';
-import OurCoreValueData from '@/components/Banalai/ourCoreValueData';
+import OurCoreValueData from '@/components/Banalai/OurCoreValueData';
 
 const About = () => {
     const { ourCoreValueData } = usePage<any>().props;
