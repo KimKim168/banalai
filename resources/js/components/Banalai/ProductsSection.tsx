@@ -1,4 +1,4 @@
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 
 const imgBgColors = [
     'bg-purple-500',
@@ -28,8 +28,9 @@ export default function ProductsSection() {
                 {/* Products */}
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                     {productData?.children?.map((item, index) => (
-                        <div
+                        <Link
                             key={item?.id}
+                            href={`/product/${item?.id}`}
                             className="rounded-xl border bg-blue-50 border-gray-100 p-8 shadow-md transition hover:shadow-xl"
                         >
                             {/* Icon */}
@@ -56,13 +57,13 @@ export default function ProductsSection() {
                             {/* Long Description (CKEditor HTML) */}
                             {item?.long_description && (
                                 <div
-                                    className="prose max-w-none prose-p:my-0"
+                                    className="prose max-w-none prose-p:my-0 line-clamp-6 max-h-[7.5em]"
                                     dangerouslySetInnerHTML={{
                                         __html: item?.long_description
                                     }}
                                 />
                             )}
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

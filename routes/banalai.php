@@ -8,11 +8,15 @@ Route::get('/', [BanalaiFrontPageController::class, 'index']);
 
 Route::get('/products', [BanalaiFrontPageController::class, 'products']);
 
+Route::get('/product/{id}', [BanalaiFrontPageController::class, 'product_show']);
+
 Route::get('/pricing', [BanalaiFrontPageController::class, 'pricing']);
 
 Route::get('/about', [BanalaiFrontPageController::class, 'about']);
 
 Route::get('/support', [BanalaiFrontPageController::class, 'support']);
+
+Route::get('/support/{id}', [BanalaiFrontPageController::class, 'support_show']);
 
 
 Route::get('/banalai_register', function () {

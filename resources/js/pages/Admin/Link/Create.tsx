@@ -41,7 +41,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
         type_code: editData?.type_code || types[0]?.code || '',
         name: editData?.name || '',
         name_kh: editData?.name_kh || '',
-        link: editData?.name_kh || '',
+        link: editData?.link || '',
         order_index: editData?.order_index || 100,
         short_description: editData?.short_description || '',
         short_description_kh: editData?.short_description_kh || '',
@@ -114,14 +114,14 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             error={errors.name_kh}
                         />
 
-                        <FormFieldTextArea
+                        {/* <FormFieldTextArea
                             id="short_description_kh"
                             name="short_description_kh"
                             label="Short Description Khmer"
                             value={data.short_description_kh}
                             onChange={(val) => setData('short_description_kh', val)}
                             error={errors.short_description_kh}
-                        />
+                        /> */}
                     </div>
                 ) : (
                     <div className="form-field-container">
@@ -148,7 +148,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             containerClassName="col-span-2"
                         />
 
-                        <FormFieldTextArea
+                        {/* <FormFieldTextArea
                             id="short_description"
                             name="short_description"
                             label="Short Description"
@@ -156,7 +156,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             onChange={(val) => setData('short_description', val)}
                             error={errors.short_description}
                             containerClassName="col-span-2"
-                        />
+                        /> */}
                         {types?.length > 0 && (
                             <FormCombobox
                                 name="type_code"

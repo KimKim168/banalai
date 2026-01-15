@@ -1,4 +1,4 @@
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import BanalaiLayout from './Layout';
 
 const imgBgColors = [
@@ -28,20 +28,20 @@ const Support = () => {
           {/* Cards */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {supportData?.children?.map((service, index) => (
-              <div
+              <Link
                 key={service.id}
+                href={`/support/${service?.id}`}
                 className="rounded-xl border border-gray-100 p-8 shadow-md transition-shadow hover:shadow-xl"
               >
                 {/* Icon */}
                 <div
                   className="mb-4 flex h-16 w-16 items-center justify-center rounded-lg"
-                  style={{ background: imgBgColors[index % imgBgColors.length] }}
                 >
                   {service.icon && (
                     <img
                       src={`/assets/images/pages/${service.icon}`}
                       alt={service.name}
-                      className="h-10 w-10 object-contain"
+                      className="h-full w-full object-contain rounded-lg"
                     />
                   )}
                 </div>
@@ -59,11 +59,11 @@ const Support = () => {
                 {/* Long description (CKEditor HTML) */}
                 {service.long_description && (
                   <div
-                    className="mt-4 prose prose-sm max-w-none"
+                    className="prose max-w-none prose-p:my-0 line-clamp-6 max-h-[7.5em]"
                     dangerouslySetInnerHTML={{ __html: service.long_description }}
                   />
                 )}
-              </div>
+              </Link>
             ))}
           </div>
 

@@ -219,8 +219,19 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 description="Select the parent page where this page belongs to."
                             />
                         )}
+                        <FormField
+                            required
+                            type="number"
+                            id="order_index"
+                            name="order_index"
+                            label="Order Index"
+                            value={data.order_index || 100}
+                            onChange={(val) => setData('order_index', Number(val))}
+                            error={errors.order_index}
+                            description="Lower number has higher priority."
+                        />
 
-                        {types?.length > 0 && (
+                        {/* {types?.length > 0 && (
                             <FormCombobox
                                 name="type_code"
                                 label="Type"
@@ -232,7 +243,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 onChange={(val) => setData('type_code', val)}
                                 error={errors.type_code}
                             />
-                        )}
+                        )} */}
 
                         <FormField
                             id="button_title"
@@ -250,18 +261,6 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             value={data.link || ''}
                             onChange={(val) => setData('link', val)}
                             error={errors.link}
-                        />
-
-                        <FormField
-                            required
-                            type="number"
-                            id="order_index"
-                            name="order_index"
-                            label="Order Index"
-                            value={data.order_index || 100}
-                            onChange={(val) => setData('order_index', Number(val))}
-                            error={errors.order_index}
-                            description="Lower number has higher priority."
                         />
                         <div className="col-span-2 grid content-start gap-2">
                             <FormLabel label="Long Description" />

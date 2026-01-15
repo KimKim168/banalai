@@ -64,7 +64,6 @@ const Index = () => {
             </Head>
             <HeroBanalai />
             <LibrarySearch />
-
             <FeaturesSection features={productData} />
             <div className="mt-20">
                 <FreePlanSection />

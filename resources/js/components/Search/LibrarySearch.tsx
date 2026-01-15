@@ -69,7 +69,7 @@ const LibrarySearch = ({ debounceSearch = true }: LibrarySearchProps) => {
                         if (isOnLibrariesPage && debounceSearch) debouncedSearch(e.target.value);
                     }}
                     onKeyDown={handleKeyDown}
-                    placeholder="Search libraries by name, institution, address..."
+                    placeholder="Search all items in the library"
                     className="flex-1 border-0 bg-transparent pl-2 text-base shadow-none focus-visible:ring-0 sm:pl-3 sm:text-lg"
                 />
 

@@ -5,7 +5,7 @@ const HeroBanalai = () => {
     const { hero } = usePage<any>().props;
     const { currentLocale } = useTranslation();
     return (
-        <section id="home" className="bg-white px-4 pt-24 pb-20 sm:px-6 lg:px-8">
+        <section id="home" className="bg-white px-4 pt-24 md:pb-12 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
                     {/* Left Content */}
@@ -36,7 +36,7 @@ const HeroBanalai = () => {
                                 href="/support"
                                 className="w-full rounded-lg border border-gray-300 bg-white px-8 py-4 text-center font-semibold text-gray-700 shadow-md transition-colors hover:bg-gray-50 hover:shadow-lg sm:w-auto"
                             >
-                                Request Demo
+                               Demo
                             </Link>
                         </div>
                     </div>
@@ -44,7 +44,7 @@ const HeroBanalai = () => {
                     {/* Right Image */}
                     <div className="order-1 lg:order-2">
                         <div className="relative">
-                            <div className="overflow-hidden rounded-2xl shadow-2xl">
+                            <div className="overflow-hidden rounded-2xl shadow-md">
                                 <img
                                     src={`/assets/images/pages/${hero?.images?.[0]?.image}`}
                                     alt="People collaborating with digital library resources"

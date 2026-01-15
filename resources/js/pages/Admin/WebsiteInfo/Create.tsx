@@ -187,7 +187,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             containerClassName="col-span-2"
                         />
 
-                        <FormField
+                        {/* <FormField
                             id="working_hours_kh"
                             name="working_hours_kh"
                             label="Working Hours Khmer"
@@ -203,7 +203,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             value={data.working_days_kh}
                             onChange={(val) => setData('working_days_kh', val)}
                             error={errors.working_days_kh}
-                        />
+                        /> */}
 
                         <FormField
                             id="copyright_kh"
@@ -273,7 +273,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             error={errors.email}
                         />
 
-                        <FormField
+                        {/* <FormField
                             id="working_hours"
                             name="working_hours"
                             label="Working Hours"
@@ -289,7 +289,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             value={data.working_days}
                             onChange={(val) => setData('working_days', val)}
                             error={errors.working_days}
-                        />
+                        /> */}
 
                         <FormField
                             id="copyright"
@@ -311,14 +311,14 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             />
                         </div>
 
-                        <div>
-                            <FormFileUpload key={editData?.logo} id="logo" label="Logo" files={files} setFiles={setFiles} />
+                        <div className='col-span-2'>
+                            <FormFileUpload key={editData?.logo} id="logo" label="Logo" files={files} setFiles={setFiles}/>
                             {editData?.logo && (
                                 <UploadedImage label="Uploaded Logo" images={editData?.logo} basePath="/assets/images/website_infos/" />
                             )}
                         </div>
 
-                        <div>
+                        {/* <div>
                             <FormFileUpload
                                 key={editData?.logo_darkmode}
                                 id="logo_darkmode"
@@ -333,7 +333,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                     basePath="/assets/images/website_infos/"
                                 />
                             )}
-                        </div>
+                        </div> */}
                     </div>
                 )}
 

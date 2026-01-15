@@ -8,10 +8,12 @@ import {
     BookOpen,
     FilesIcon,
     Folder,
+    Globe,
     LanguagesIcon,
     LayoutGrid,
     LayoutList,
     LucideIcon,
+    LucideLink,
     MapPinHouseIcon,
     SchoolIcon,
     SettingsIcon,
@@ -105,44 +107,62 @@ const mainNavItems: {
             },
         ],
     },
-    {
-        title: 'Website Settings',
-        url: '/admin/website-infos',
-        icon: SettingsIcon,
-        permission: 'website_info view',
-        items: [
-            {
+     {
                 title: 'Website Info',
                 url: '/admin/website-infos',
+                icon: Globe,
                 permission: 'website_info view',
             },
             {
                 title: 'Pages',
                 url: '/admin/pages',
+                icon: LayoutList,
                 permission: 'page view',
             },
             {
                 title: 'Links',
                 url: '/admin/links',
+                icon: LucideLink,
                 permission: 'link view',
             },
-            {
-                title: 'Key Values',
-                url: '/admin/key-values',
-                permission: 'key_value view',
-            },
-            {
-                title: 'FAQ',
-                url: '/admin/faqs',
-                permission: 'faq view',
-            },
-            {
-                title: 'Banners',
-                url: '/admin/banners',
-                permission: 'banner view',
-            },
-        ],
-    },
+    // {
+    //     title: 'Website Settings',
+    //     url: '/admin/website-infos',
+    //     icon: SettingsIcon,
+    //     permission: 'website_info view',
+    //     items: [
+    //         {
+    //             title: 'Website Info',
+    //             url: '/admin/website-infos',
+    //             permission: 'website_info view',
+    //         },
+    //         {
+    //             title: 'Pages',
+    //             url: '/admin/pages',
+    //             permission: 'page view',
+    //         },
+    //         {
+    //             title: 'Links',
+    //             url: '/admin/links',
+    //             permission: 'link view',
+    //         },
+    //         {
+    //             title: 'Key Values',
+    //             url: '/admin/key-values',
+    //             permission: 'key_value view',
+    //         },
+    //         {
+    //             title: 'FAQ',
+    //             url: '/admin/faqs',
+    //             permission: 'faq view',
+    //         },
+    //         {
+    //             title: 'Banners',
+    //             url: '/admin/banners',
+    //             permission: 'banner view',
+    //         },
+    //     ],
+    // },
     {
         title: 'Library Data',
         url: '/admin/library-data',
