@@ -50,8 +50,7 @@ export default function ProductsSection() {
                             </h3>
 
                             {/* Short Description */}
-                            <p className="mb-4 text-gray-600">
-                                {item?.short_description}
+                            <p className="mb-4 text-gray-600" dangerouslySetInnerHTML={{__html:item?.short_description}}>
                             </p>
 
                             {/* Long Description (CKEditor HTML) */}

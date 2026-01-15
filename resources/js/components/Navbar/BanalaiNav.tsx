@@ -1,5 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import React, { useState } from 'react';
+import NavLanguage from './NavLanguage';
 
 const BanalaiNav = () => {
   const [open, setOpen] = useState(false);
@@ -19,13 +20,16 @@ const BanalaiNav = () => {
             <NavLink href="/pricing">Pricing</NavLink>
             <NavLink href="/about">About</NavLink>
             <NavLink href="/support">Support</NavLink>
-
+            <div className='flex gap-2'>
             <Link
               href="/banalai_login"
-              className="rounded-lg bg-indigo-600 px-4 py-2 font-semibold text-white hover:bg-indigo-700 transition"
+              className="rounded-md bg-indigo-600 px-4 py-1 font-semibold text-white hover:bg-indigo-700 transition"
             >
               Login
             </Link>
+              <NavLanguage/>
+
+            </div>
           </div>
 
           {/* Mobile Button */}

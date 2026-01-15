@@ -17,7 +17,12 @@ class BanalaiFrontPageController extends Controller
     {
 
         $hero = Page::where('code', 'home')->with('images')->first();
-        $productData = Page::where('code', 'products')->with('children')->orderBy('order_index')->get();
+        $productData = Page::where('code', 'products')
+            ->with([
+                'children' => fn($q) => $q->orderBy('order_index')
+            ])
+            ->first();
+
         // return ($hero);
         return Inertia::render('Banalai/Index', [
             'hero' => $hero,
@@ -27,10 +32,22 @@ class BanalaiFrontPageController extends Controller
 
     public function about()
     {
+        $ourMission = Page::where('code', 'our-mission')
+            ->with([
+                'children' => fn($q) => $q->orderBy('order_index'),
+                'children.images'
+            ])
+            ->first();
+
+        $ourCoreValueData = Page::where('code', 'our-core-values')
+            ->with([
+                'children' => fn($q) => $q->orderBy('order_index'),
+                'children.images'
+            ])
+            ->first();
+
         $aboutHeader = Page::where('code', 'about')->first();
-        $ourMission = Page::where('code', 'our-mission')->with('children.images')->orderBy('order_index')->get();
         $ourStory = Page::where('code', 'our-story')->first();
-        $ourCoreValueData = Page::where('code', 'our-core-values')->with('children.images')->orderBy('order_index')->get();
         // return $ourMission;
         return Inertia::render('Banalai/About', [
             'aboutHeader' => $aboutHeader,
@@ -41,7 +58,13 @@ class BanalaiFrontPageController extends Controller
     }
     public function support()
     {
-        $supportData = Page::where('code', 'support')->with('children.images')->orderBy('order_index')->get();
+        $supportData = Page::where('code', 'support')
+    ->with([
+        'children' => fn ($q) => $q->orderBy('order_index'),
+        'children.images'
+    ])
+    ->first();
+
         // return $supportData;
         return Inertia::render('Banalai/Supoort', [
             'supportData' => $supportData,
@@ -58,7 +81,12 @@ class BanalaiFrontPageController extends Controller
 
     public function products(Request $request)
     {
-        $productData = Page::where('code', 'products')->with('children')->orderBy('order_index')->first();
+        $productData = Page::where('code', 'products')
+            ->with(['children' => function ($q) {
+                $q->orderBy('order_index');
+            }])
+            ->first();
+
         // return ($productData);
         return Inertia::render('Banalai/Products', [
             'productData' => $productData,

@@ -140,8 +140,11 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             error={errors.name_kh}
                             containerClassName="col-span-2"
                         />
-
-                        <FormFieldTextArea
+                         <div className="col-span-2 grid content-start gap-2">
+                            <FormLabel label="Short Description Khmer" />
+                            <MyCkeditor5 data={data.short_description_kh || ''} setData={(val: any) => setData('short_description_kh', val)} />
+                        </div>
+                        {/* <FormFieldTextArea
                             id="short_description_kh"
                             name="short_description_kh"
                             label="Short Description Khmer"
@@ -149,7 +152,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             onChange={(val) => setData('short_description_kh', val)}
                             error={errors.short_description_kh}
                             containerClassName="col-span-2"
-                        />
+                        /> */}
 
                         <FormField
                             id="button_title_kh"
@@ -188,8 +191,11 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             error={errors.name}
                             containerClassName="col-span-2"
                         />
-
-                        <FormFieldTextArea
+                        <div className="col-span-2 grid content-start gap-2">
+                            <FormLabel label="Short Description" />
+                            <MyCkeditor5 data={data.short_description || ''} setData={(val: any) => setData('short_description', val)} />
+                        </div>
+                        {/* <FormFieldTextArea
                             id="short_description"
                             name="short_description"
                             label="Short Description"
@@ -197,7 +203,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             onChange={(val) => setData('short_description', val)}
                             error={errors.short_description}
                             containerClassName="col-span-2"
-                        />
+                        /> */}
 
                         {parents?.length > 0 && (
                             <FormCombobox
