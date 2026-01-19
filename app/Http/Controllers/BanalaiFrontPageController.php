@@ -81,7 +81,7 @@ class BanalaiFrontPageController extends Controller
     public function products(Request $request)
     {
         $productData = Page::where('code', 'products')->first();
-        $banalaiLibrary = BanalaiLibrary::orderBy('order_index')->get();
+        $banalaiLibrary = BanalaiLibrary::all();
 
         // return ($productData);
         return Inertia::render('Banalai/Products', [
