@@ -58,11 +58,11 @@ class BanalaiFrontPageController extends Controller
     public function support()
     {
         $supportData = Page::where('code', 'support')
-    ->with([
-        'children' => fn ($q) => $q->orderBy('order_index'),
-        'children.images'
-    ])
-    ->first();
+            ->with([
+                'children' => fn($q) => $q->orderBy('order_index'),
+                'children.images'
+            ])
+            ->first();
 
         // return $supportData;
         return Inertia::render('Banalai/Supoort', [
@@ -91,7 +91,7 @@ class BanalaiFrontPageController extends Controller
     }
     public function product_show(string $id)
     {
-        $showData = Page::find($id);
+        $showData = BanalaiLibrary::find($id);
         // return ($showData);
         return Inertia::render('Banalai/Show', [
             'showData' => $showData,

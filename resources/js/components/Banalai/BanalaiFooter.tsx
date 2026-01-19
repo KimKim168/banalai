@@ -43,7 +43,7 @@ const BanalaiFooter = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="mb-6 text-lg font-semibold text-white">Quick Links</h4>
+                        <h4 className="mb-6 text-lg font-semibold text-white">{t('Quick Links')}</h4>
                         <ul className="space-y-3">
                             {[
                                 { name: 'Home', href: '/', color: 'bg-yellow-400', active: 'text-yellow-400' },
@@ -73,7 +73,7 @@ const BanalaiFooter = () => {
 
                     {/* Contact Info */}
                     <div>
-                        <h4 className="mb-6 text-lg font-semibold text-white">Get in Touch</h4>
+                        <h4 className="mb-6 text-lg font-semibold text-white">{t('Get in Touch')}</h4>
                         <ul className="space-y-4">
                             <li className="flex items-start">
                                 <div className="mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-yellow-500">
@@ -87,7 +87,7 @@ const BanalaiFooter = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-400">Email</p>
+                                    <p className="text-sm text-gray-400">{t("Email")}</p>
                                     <a href="mailto:info@banalai.com" className="text-white transition-colors hover:text-indigo-400">
                                         {website_info?.email}
                                     </a>
@@ -105,7 +105,7 @@ const BanalaiFooter = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-400">Phone</p>
+                                    <p className="text-sm text-gray-400">{t('Phone')}</p>
                                     <a href="tel:+1234567890" className="text-white transition-colors hover:text-indigo-400">
                                         {website_info?.phone}
                                     </a>
@@ -119,7 +119,7 @@ const BanalaiFooter = () => {
                 <div className="border-t border-gray-700 pt-8">
                     <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
                         <div className="flex flex-col items-center space-y-2 md:flex-row md:space-y-0 md:space-x-4">
-                            <p className="text-sm text-gray-400">{website_info?.copyright}</p>
+                            <p className="text-sm text-gray-400">{currentLocale === 'kh' ? website_info?.copyright_kh || website_info?.copyright : website_info?.copyright}</p>
                             <p className="text-sm text-gray-500">
                                 Powered By:{' '}
                                 <a

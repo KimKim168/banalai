@@ -25,7 +25,7 @@ const NavLanguage = ({ buttonClassName = '' }) => {
                 variant="outline"
                 onClick={() => switchLang('kh')}
                 className={cn(
-                    `object-coverfull h-9 overflow-hidden dark:border-white ${currentLocale === 'kh' && 'ring-3 ring-primary/40'}`,
+                    `object-coverfull h-9 overflow-hidden dark:border-white ${currentLocale === 'kh' && 'ring-1 ring-primary/40'}`,
                     buttonClassName,
                 )}
             >
@@ -37,7 +37,7 @@ const NavLanguage = ({ buttonClassName = '' }) => {
                 variant="outline"
                 onClick={() => switchLang('en')}
                 className={cn(
-                    `object-coverfull h-9 overflow-hidden dark:border-white ${currentLocale === 'en' && 'ring-3 ring-primary/40'}`,
+                    `object-coverfull h-9 overflow-hidden dark:border-white ${currentLocale === 'en' && 'ring-1 ring-primary/40'}`,
                     buttonClassName,
                 )}
             >
