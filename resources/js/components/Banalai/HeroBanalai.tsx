@@ -12,9 +12,9 @@ const HeroBanalai = () => {
                     <div className="order-2 lg:order-1">
                         <h1 className="mb-6 text-2xl leading-tight font-bold text-gray-900 sm:text-4xl lg:text-4xl">
                             {currentLocale === 'kh' ? hero?.name_kh || hero?.name : hero?.name}
-                            <p className="bg-[linear-gradient(88deg,#155dfc,#1c59fb,#2454fb,#2b50fa,#324bf9,#3947f8,#4142f8,#483ef7,#4f39f6,#5834f7,#612ff7,#6a2af8,#7425f8,#7d1ff9,#861af9,#8f15fa,#9810fa)] bg-clip-text text-transparent">
-                                {currentLocale === 'kh' ? hero?.short_description_kh || hero?.short_description : hero?.short_description}
-                            </p>
+                            <div className="bg-[linear-gradient(88deg,#155dfc,#1c59fb,#2454fb,#2b50fa,#324bf9,#3947f8,#4142f8,#483ef7,#4f39f6,#5834f7,#612ff7,#6a2af8,#7425f8,#7d1ff9,#861af9,#8f15fa,#9810fa)] bg-clip-text text-transparent" dangerouslySetInnerHTML={{__html:currentLocale === 'kh' ? hero?.short_description_kh || hero?.short_description : hero?.short_description}}>
+                                
+                            </div>
                         </h1>
 
                         <p
