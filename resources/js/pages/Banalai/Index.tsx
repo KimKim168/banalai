@@ -7,32 +7,7 @@ import { Head, usePage } from '@inertiajs/react';
 import BanalaiLayout from './Layout';
 
 const Index = () => {
-    const { productData } = usePage<any>().props;
-    const features = {
-        title: '',
-        children: [
-            {
-                title: 'Digital Library Subscription',
-                short_description: 'Comprehensive subscription management for digital collections and resources.',
-                image: '/assets/icon1.png',
-            },
-            {
-                title: 'Library Operation Management',
-                short_description: 'Streamline daily operations with powerful management tools and automation.',
-                image: '/assets/icon2.png',
-            },
-            {
-                title: 'Resource Subscription Services',
-                short_description: 'Manage and distribute digital resources with flexible subscription models.',
-                image: '/assets/icon3.png',
-            },
-            {
-                title: 'Cloud & Local Server Deployment',
-                short_description: 'Choose between cloud hosting or on-premise deployment based on your needs.',
-                image: '/assets/icon4.png',
-            },
-        ],
-    };
+    const { BanalaiLibrary } = usePage<any>().props;
     const { website_info, app_url } = usePage<any>().props;
     const { t, currentLocale } = useTranslation();
 
@@ -64,7 +39,7 @@ const Index = () => {
             </Head>
             <HeroBanalai />
             <LibrarySearch />
-            <FeaturesSection features={productData} />
+            <FeaturesSection features={BanalaiLibrary} />
             <div className="mt-20">
                 <FreePlanSection />
             </div>

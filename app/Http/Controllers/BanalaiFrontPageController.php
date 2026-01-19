@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BanalaiLibrary;
 use App\Models\Page;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -17,16 +18,14 @@ class BanalaiFrontPageController extends Controller
     {
 
         $hero = Page::where('code', 'home')->with('images')->first();
-        $productData = Page::where('code', 'products')
-            ->with([
-                'children' => fn($q) => $q->orderBy('order_index')
-            ])
-            ->first();
+        $BanalaiLibrary = BanalaiLibrary::orderBy('order_index')->limit('16')->get();
+        $hasMore = $BanalaiLibrary->count() > 15;
 
-        // return ($hero);
+        // return ($BanalaiLibrary);
         return Inertia::render('Banalai/Index', [
             'hero' => $hero,
-            'productData' => $productData,
+            'BanalaiLibrary' => $BanalaiLibrary,
+            'hasMore' => $hasMore,
         ]);
     }
 
@@ -81,15 +80,13 @@ class BanalaiFrontPageController extends Controller
 
     public function products(Request $request)
     {
-        $productData = Page::where('code', 'products')
-            ->with(['children' => function ($q) {
-                $q->orderBy('order_index');
-            }])
-            ->first();
+        $productData = Page::where('code', 'products')->first();
+        $BanalaiLibrary = BanalaiLibrary::orderBy('order_index')->get();
 
         // return ($productData);
         return Inertia::render('Banalai/Products', [
             'productData' => $productData,
+            'BanalaiLibrary' => $BanalaiLibrary,
         ]);
     }
     public function product_show(string $id)

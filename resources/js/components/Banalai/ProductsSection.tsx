@@ -8,7 +8,7 @@ const imgBgColors = [
 ];
 
 export default function ProductsSection() {
-    const { productData } = usePage<any>().props;
+    const { productData, BanalaiLibrary } = usePage<any>().props;
 
     return (
         <section className="px-4 pt-32 pb-20 sm:px-6 lg:px-8">
@@ -27,7 +27,7 @@ export default function ProductsSection() {
 
                 {/* Products */}
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                    {productData?.children?.map((item, index) => (
+                    {BanalaiLibrary?.map((item, index) => (
                         <Link
                             key={item?.id}
                             href={`/product/${item?.id}`}
@@ -38,7 +38,7 @@ export default function ProductsSection() {
                                 className={`mb-4 flex h-16 w-16 items-center justify-center rounded-lg`}
                             >
                                 <img
-                                    src={`/assets/images/pages/${item?.icon}`}
+                                    src={`/assets/images/banalai_library/${item?.icon}`}
                                     alt={item?.name}
                                     className="h-full w-full object-contain"
                                 />

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
+use App\Models\BanalaiLibrary;
+use App\Models\BanalaiLibraryImage;
 use App\Models\Page;
 use App\Models\PageImage;
 use App\Models\Type;
@@ -33,30 +35,18 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
         $search = $request->input('search', '');
         $sortBy = $request->input('sortBy', 'id');
         $sortDirection = $request->input('sortDirection', 'desc');
-        $type_code = $request->input('type_code');
         $trashed = $request->input('trashed'); // '', 'with', 'only'
 
-        $selected_page_id = $request->input('selected_page_id');
-        $selectedPage = Page::find($selected_page_id);
-        $selectedPageParents = collect();
+        $query = BanalaiLibrary::query();
 
-        if ($selectedPage) {
-            $selectedPageParents = $selectedPage->allParents()->reverse()->values() ?: collect();
-        }
+        $query->with('created_user', 'updated_user');
 
-        $query = Page::query();
-
-        if ($type_code) {
-            $query->where('type_code', $type_code);
-        }
-
-        if ($selectedPage) {
-            $query->where('parent_code', $selectedPage->code)->where('parent_code', '!=', null);
-        }
-
+        // if ($status) {
+        //     $query->where('status', $status);
+        // }
 
         // Filter by trashed (soft deletes)
-        if ($trashed === 'with') {
+         if ($trashed === 'with') {
             $query->withTrashed();
         } elseif ($trashed === 'only') {
             $query->onlyTrashed();
@@ -69,8 +59,6 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
                 return $sub_query->where('name', 'LIKE', "%{$search}%")
                     ->orWhere('name_kh', 'LIKE', "%{$search}%")
                     ->orWhere('id', 'LIKE', "%{$search}%")
-                    ->orWhere('type_code', 'LIKE', "%{$search}%")
-                    ->orWhere('code', 'LIKE', "%{$search}%")
                     ->orWhere('short_description', 'LIKE', "%{$search}%")
                     ->orWhere('short_description_kh', 'LIKE', "%{$search}%");
             });
@@ -78,16 +66,11 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
 
         $query->orderBy('id', 'desc');
 
-        $query->with('created_user', 'updated_user', 'type');
-
-
         $tableData = $query->paginate($perPage)->onEachSide(1);
 
         return Inertia::render('Admin/BanalaiLibrary/Index', [
             'tableData' => $tableData,
-            'selectedPage' => $selectedPage,
-            'selectedPageParents' => $selectedPageParents,
-            'types' => Type::where('group_code', 'page-type-group')->orderBy('order_index')->orderBy('name')->get(),
+            'types' => Type::orderBy('order_index')->orderBy('name')->get(),
         ]);
     }
 
@@ -96,16 +79,7 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
      */
     public function create(Request $request)
     {
-        return Inertia::render('Admin/Page/Create', [
-            'types' => Type::where('group_code', 'page-type-group')
-                ->orderBy('order_index')
-                ->orderBy('name')
-                ->get(),
-            'selected_page_code' => $request->input('selected_page_code'),
-            'parents' => Page::where('code', '!=', null)->orderBy('order_index')
-                ->orderBy('name')
-                ->get(),
-        ]);
+        return Inertia::render('Admin/BanalaiLibrary/Create');
     }
 
     /**
@@ -116,17 +90,12 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
         // dd($request->all());
 
         $validated = $request->validate([
-            'code' => 'nullable|string|max:255|unique:pages,code',
-            'parent_code' => 'nullable|string|max:255|exists:pages,code',
-            'type_code' => 'nullable|string|max:255|exists:types,code',
             'name' => 'required|string|max:255',
             'name_kh' => 'nullable|string|max:255',
             'short_description' => 'nullable|string',
             'short_description_kh' => 'nullable|string',
             'long_description' => 'nullable|string',
             'long_description_kh' => 'nullable|string',
-            'button_title' => 'nullable|string|max:255',
-            'button_title_kh' => 'nullable|string|max:255',
             'link' => 'nullable|string',
             'icon' => 'nullable|mimes:jpeg,png,jpg,gif,webp,svg|max:4096',
             'order_index' => 'required|numeric',
@@ -149,7 +118,7 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
             if ($request->hasFile('icon')) {
                 $imageName = ImageHelper::uploadAndResizeImageWebp(
                     $request->file('icon'),
-                    'assets/images/pages',
+                    'assets/images/banalai_library',
                     600
                 );
                 $validated['icon'] = $imageName;
@@ -159,13 +128,13 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
             unset($validated['images']);
 
             // Create the Page
-            $created_page = Page::create($validated);
+            $created_page = BanalaiLibrary::create($validated);
 
             if ($image_files) {
                 try {
                     foreach ($image_files as $image) {
-                        $created_image_name = ImageHelper::uploadAndResizeImageWebp($image, 'assets/images/pages', 600);
-                        PageImage::create([
+                        $created_image_name = ImageHelper::uploadAndResizeImageWebp($image, 'assets/images/banalai_library', 600);
+                        BanalaiLibraryImage::create([
                             'image' => $created_image_name,
                             'page_id' => $created_page->id,
                         ]);
@@ -175,9 +144,9 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
                 }
             }
 
-            return redirect()->back()->with('success', 'Page created successfully!');
+            return redirect()->back()->with('success', 'Library created successfully!');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors('Failed to create Page: ' . $e->getMessage());
+            return redirect()->back()->withErrors('Failed to create Library: ' . $e->getMessage());
         }
     }
 
@@ -185,57 +154,39 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
     /**
      * Display the specified resource.
      */
-    public function show(Page $page)
+    public function show(BanalaiLibrary $library)
     {
         // dd($page->loadCount('children'));
-        return Inertia::render('Admin/Page/Create', [
-            'editData' => $page->loadCount('children')->load('images'),
+        return Inertia::render('Admin/BanalaiLibrary/Create', [
+            'editData' => $library,
             'readOnly' => true,
-            'types' => Type::where('group_code', 'page-type-group')
-                ->orderBy('order_index')
-                ->orderBy('name')
-                ->get(),
-            'parents' => Page::where('code', '!=', null)->orderBy('order_index')
-                ->orderBy('name')
-                ->get(),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Page $page)
+    public function edit(BanalaiLibrary $library)
     {
-        return Inertia::render('Admin/Page/Create', [
-            'editData' => $page->loadCount('children')->load('images'),
-            'types' => Type::where('group_code', 'page-type-group')
-                ->orderBy('order_index')
-                ->orderBy('name')
-                ->get(),
-            'parents' => Page::where('code', '!=', null)->orderBy('order_index')
-                ->orderBy('name')
-                ->get(),
+        return Inertia::render('Admin/BanalaiLibrary/Create', [
+            'editData' => $library,
+            
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Page $page)
+    public function update(Request $request, BanalaiLibrary $library)
     {
         // dd($request->all());
         $validated = $request->validate([
-            'code' => 'nullable|string|max:255|unique:pages,code,' . $page->id,
-            'parent_code' => 'nullable|string|max:255|exists:pages,code',
-            'type_code' => 'nullable|string|max:255|exists:types,code',
             'name' => 'required|string|max:255',
             'name_kh' => 'nullable|string|max:255',
             'short_description' => 'nullable|string',
             'short_description_kh' => 'nullable|string',
             'long_description' => 'nullable|string',
             'long_description_kh' => 'nullable|string',
-            'button_title' => 'nullable|string|max:255',
-            'button_title_kh' => 'nullable|string|max:255',
             'link' => 'nullable|string',
             'icon' => 'nullable|mimes:jpeg,png,jpg,gif,webp,svg|max:4096',
             'images.*' => 'nullable|mimes:jpeg,png,jpg,gif,webp,svg|max:4096',
@@ -261,15 +212,15 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
             if ($imageFile) {
                 $imageName = ImageHelper::uploadAndResizeImageWebp(
                     $imageFile,
-                    'assets/images/pages',
+                    'assets/images/banalai_library',
                     600
                 );
 
                 $validated['icon'] = $imageName;
 
                 // delete old if replaced
-                if ($imageName && $page->image) {
-                    ImageHelper::deleteImage($page->image, 'assets/images/pages');
+                if ($imageName && $library->image) {
+                    ImageHelper::deleteImage($library->image, 'assets/images/banalai_library');
                 }
             }
 
@@ -277,15 +228,15 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
             unset($validated['images']);
 
             // Update
-            $page->update($validated);
+            $library->update($validated);
 
             if ($image_files) {
                 try {
                     foreach ($image_files as $image) {
-                        $created_image_name = ImageHelper::uploadAndResizeImageWebp($image, 'assets/images/pages', 600);
-                        PageImage::create([
+                        $created_image_name = ImageHelper::uploadAndResizeImageWebp($image, 'assets/images/banalai_library', 600);
+                        BanalaiLibraryImage::create([
                             'image' => $created_image_name,
-                            'page_id' => $page->id,
+                            'page_id' => $library->id,
                         ]);
                     }
                 } catch (\Exception $e) {
@@ -293,34 +244,34 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
                 }
             }
 
-            return redirect()->back()->with('success', 'Page updated successfully!');
+            return redirect()->back()->with('success', 'Library updated successfully!');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors('Failed to update Page: ' . $e->getMessage());
+            return redirect()->back()->withErrors('Failed to update Library: ' . $e->getMessage());
         }
     }
 
 
     public function recover($id)
     {
-        $page = Page::withTrashed()->findOrFail($id); // 👈 include soft-deleted Page
-        $page->restore(); // restores deleted_at to null
-        return redirect()->back()->with('success', 'Page recovered successfully.');
+        $library = BanalaiLibrary::withTrashed()->findOrFail($id); // 👈 include soft-deleted Page
+        $library->restore(); // restores deleted_at to null
+        return redirect()->back()->with('success', 'Library recovered successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Page $page)
+    public function destroy(BanalaiLibrary $library)
     {
         // if ($user->image) {
         //     ImageHelper::deleteImage($user->image, 'assets/images/users');
         // }
 
-        $page->delete(); // this will now just set deleted_at timestamp
-        return redirect()->back()->with('success', 'Page deleted successfully.');
+        $library->delete(); // this will now just set deleted_at timestamp
+        return redirect()->back()->with('success', 'Library deleted successfully.');
     }
 
-    public function destroy_image(PageImage $image)
+    public function destroy_image(BanalaiLibraryImage $image)
     {
         // Debugging (Check if model is found)
         if (!$image) {
@@ -328,7 +279,7 @@ class BanalaiLibraryController extends Controller implements HasMiddleware
         }
 
         // Call helper function to delete image
-        ImageHelper::deleteImage($image->image, 'assets/images/pages');
+        ImageHelper::deleteImage($image->image, 'assets/images/banalai_library');
 
         // Delete from DB
         $image->delete();

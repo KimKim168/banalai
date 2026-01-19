@@ -22,11 +22,8 @@ const TableData = () => {
                             <TableHeadWithSort field="id" label="ID" />
                             <TableHeadWithSort label="Action" />
                             <TableHeadWithSort label="Image" />
-                            <TableHeadWithSort field="code" label="Code" />
                             <TableHeadWithSort field="name" label="Name" />
                             <TableHeadWithSort field="name_kh" label="Name Khmer" />
-                            <TableHeadWithSort field="parent_code" label="Parent Code" />
-                            <TableHeadWithSort field="type_code" label="Type" />
                             <TableHeadWithSort field="order_index" label="Order Index" />
                             <TableHeadWithSort field="short_description" label="Short Description" />
                             <TableHeadWithSort field="short_description_kh" label="Short Description Khmer" />
@@ -41,26 +38,26 @@ const TableData = () => {
                             <TableRow
                                 className="table-row"
                                 key={item.id}
-                                onDoubleClick={() => router.visit(`/admin/pages?selected_page_id=${item.id}`)}
+                                onDoubleClick={() => router.visit(`/admin/libraries?selected_page_id=${item.id}`)}
                             >
                                 <TableCellText value={item.id} />
                                 <TableCellActions>
                                     {item.deleted_at ? (
                                         <RecoverItem
                                             deleted_at={item.deleted_at}
-                                            recoverPath={`/admin/pages/${item.id}/recover`}
+                                            recoverPath={`/admin/libraries/${item.id}/recover`}
                                             permission="user update"
                                         />
                                     ) : (
                                         <>
                                             {/* Edit Dialog */}
-                                            <EditItemButton url={`/admin/pages/${item.id}/edit`} permission="page update" />
+                                            <EditItemButton url={`/admin/libraries/${item.id}/edit`} permission="page update" />
 
                                             {/* View Dialog */}
-                                            <ViewItemButton url={`/admin/pages/${item.id}`} permission="page view" />
+                                            <ViewItemButton url={`/admin/libraries/${item.id}`} permission="page view" />
 
                                             {/* Delete Item */}
-                                            <DeleteItemButton deletePath="/admin/pages/" id={item.id} permission="page delete" />
+                                            <DeleteItemButton deletePath="/admin/libraries/" id={item.id} permission="page delete" />
                                         </>
                                     )}
                                 </TableCellActions>
@@ -68,14 +65,11 @@ const TableData = () => {
                                     <TableCellAvatar
                                         className="rounded-none border-none object-contain"
                                         alt={item.name}
-                                        image={`/assets/images/pages/thumb/${item.icon}`}
+                                        image={`/assets/images/banalai_library/thumb/${item.icon}`}
                                     />
                                 </TableCell>
-                                <TableCellText value={item.code} />
                                 <TableCellText value={item.name} />
                                 <TableCellText value={item.name_kh} />
-                                <TableCellText value={item.parent_code} />
-                                <TableCellText value={item.type?.name} />
                                 <TableCellText value={item.order_index} />
                                 <TableCellText value={item.short_description} />
                                 <TableCellText value={item.short_description_kh} />

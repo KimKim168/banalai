@@ -18,9 +18,6 @@ import { useForm, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 interface PageForm {
-    code?: string;
-    parent_code?: string | null;
-
     name: string;
     name_kh?: string;
 
@@ -29,10 +26,6 @@ interface PageForm {
 
     long_description?: string;
     long_description_kh?: string;
-
-    type_code?: string;
-    button_title?: string;
-    button_title_kh?: string;
 
     link?: string;
     icon?: string;
@@ -49,15 +42,12 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
 
     const [inputLanguage, setInputLanguage] = useState<'default' | 'khmer'>('default');
 
-    const { types, parents, selected_page_code } = usePage<any>().props;
+    const { types, library_data, selected_page_code } = usePage<any>().props;
 
     const [files, setFiles] = useState<File[] | null>(null);
     const [imageFiles, setImageFiles] = useState<File[] | null>(null);
 
     const { data, setData, post, processing, transform, progress, errors, reset } = useForm<PageForm>({
-        code: editData?.code || '',
-        parent_code: editData?.parent_code || selected_page_code?.toString() || null,
-        type_code: editData?.type_code || types[0]?.code || '',
         name: editData?.name || '',
         name_kh: editData?.name_kh || '',
         order_index: editData?.order_index || 10000,
@@ -65,8 +55,6 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
         short_description_kh: editData?.short_description_kh || '',
         long_description: editData?.long_description || '',
         long_description_kh: editData?.long_description_kh || '',
-        button_title: editData?.button_title || '',
-        button_title_kh: editData?.button_title_kh || '',
         link: editData?.link || '',
         icon: editData?.icon || '',
         total_views_count: editData?.total_views_count || 0,
@@ -78,7 +66,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
         transform(() => ({ ...data, icon: files ? files[0] : null, images: imageFiles || null }));
 
         if (editData?.id) {
-            post(`/admin/pages/${editData.id}/update`, {
+            post(`/admin/libraries/${editData.id}/update`, {
                 onSuccess: (page: any) => {
                     setFiles(null);
                     setImageFiles(null);
@@ -86,7 +74,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                 },
             });
         } else {
-            post('/admin/pages', {
+            post('/admin/libraries', {
                 onSuccess: (page: any) => {
                     reset();
                     setFiles(null);
@@ -99,7 +87,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
 
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
-        { title: 'Pages', href: '/admin/pages' },
+        { title: 'Libraries', href: '/admin/libraries' },
         { title: editData?.name || 'Create', href: '#' },
     ];
 
@@ -152,7 +140,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             onChange={(val) => setData('short_description_kh', val)}
                             error={errors.short_description_kh}
                             containerClassName="col-span-2"
-                        /> */}
+                        /> 
 
                         <FormField
                             id="button_title_kh"
@@ -162,6 +150,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             onChange={(val) => setData('button_title_kh', val)}
                             error={errors.button_title_kh}
                         />
+                        */}
 
                         <div className="col-span-2 grid content-start gap-2">
                             <FormLabel label="Long Description Khmer" />
@@ -170,7 +159,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                     </div>
                 ) : (
                     <div className="form-field-container">
-                        <FormField
+                        {/* <FormField
                             disable={editData?.children_count}
                             id="code"
                             name="code"
@@ -179,7 +168,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             onChange={(val: string) => setData('code', toSlug(val))}
                             error={errors.code}
                             description={editData?.children_count > 0 ? `Page has children — cannot update code.` : `Example: my-item-code`}
-                        />
+                        /> */}
 
                         <FormField
                             required
@@ -205,7 +194,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             containerClassName="col-span-2"
                         /> */}
 
-                        {parents?.length > 0 && (
+                        {/* {parents?.length > 0 && (
                             <FormCombobox
                                 name="parent_code"
                                 label="Parent"
@@ -224,7 +213,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 error={errors.parent_code}
                                 description="Select the parent page where this page belongs to."
                             />
-                        )}
+                        )} */}
                         <FormField
                             required
                             type="number"
@@ -249,7 +238,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                 onChange={(val) => setData('type_code', val)}
                                 error={errors.type_code}
                             />
-                        )} */}
+                        )} 
 
                         <FormField
                             id="button_title"
@@ -259,6 +248,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                             onChange={(val) => setData('button_title', val)}
                             error={errors.button_title}
                         />
+                        */}
 
                         <FormField
                             id="link"
@@ -275,14 +265,14 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
 
                         <div className="col-span-2">
                             <Tabs defaultValue="icon" className="w-full rounded-lg bg-muted/80 p-4">
-                                <TabsList className="border bg-border/50 p-1 dark:border-white/20">
+                                {/* <TabsList className="border bg-border/50 p-1 dark:border-white/20">
                                     <TabsTrigger value="icon" className="h-full dark:data-[state=active]:bg-white/20">
                                         {t('Icon')}
                                     </TabsTrigger>
                                     <TabsTrigger value="images" className="h-full dark:data-[state=active]:bg-white/20">
                                         {t('Images')}
                                     </TabsTrigger>
-                                </TabsList>
+                                </TabsList> */}
                                 <TabsContent value="icon">
                                     <div className={cn('form-field-container', !editData?.icon && 'md:grid-cols-1')}>
                                         <FormFileUpload key={editData?.icon} id="icon" label="Icon" files={files} setFiles={setFiles} />
@@ -293,7 +283,7 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                                 imageContainerClassName="flex-1"
                                                 label="Uploaded Icon"
                                                 images={editData?.icon}
-                                                basePath="/assets/images/pages/thumb/"
+                                                basePath="/assets/images/banalai_library/thumb/"
                                             />
                                         )}
                                     </div>
@@ -323,8 +313,8 @@ export default function Create({ editData, readOnly }: { editData?: any; readOnl
                                                 label="Uploaded Images"
                                                 permission="page update"
                                                 images={editData?.images}
-                                                deletePath="/admin/pages/images/"
-                                                basePath="/assets/images/pages/thumb/"
+                                                deletePath="/admin/banalai_library/images/"
+                                                basePath="/assets/images/banalai_library/thumb/"
                                             />
                                         )}
                                     </div>

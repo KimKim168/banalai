@@ -19,7 +19,6 @@ const Index = () => {
         },
     ];
 
-    const { selectedPage } = usePage<any>().props;
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -33,10 +32,7 @@ const Index = () => {
                     </div>
                     <div className="flex w-full justify-end md:w-auto">
                         {/* Add New Dialog */}
-                        <NewItemButton
-                            url={`/admin/pages/create${selectedPage?.code ? '?selected_page_code=' + selectedPage?.code : ''}`}
-                            permission="page create"
-                        />
+                        <NewItemButton url="/admin/libraries/create" permission="banalai_library create" />
                     </div>
                 </div>
                 <ParentBreadcrumb />

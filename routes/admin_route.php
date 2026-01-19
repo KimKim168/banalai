@@ -86,9 +86,9 @@ Route::middleware(['auth'])->group(function () {
     
     // library
     Route::resource('admin/libraries', BanalaiLibraryController::class);
-    // Route::delete('admin/pages/images/{image}', [PageController::class, 'destroy_image']);
-    // Route::post('admin/pages/{page}/update', [PageController::class, 'update']);
-    // Route::post('admin/pages/{id}/recover', [PageController::class, 'recover']);
+    Route::delete('admin/libraries/images/{image}', [BanalaiLibraryController::class, 'destroy_image']);
+    Route::post('admin/libraries/{library}/update', [BanalaiLibraryController::class, 'update']);
+    Route::post('admin/libraries/{id}/recover', [BanalaiLibraryController::class, 'recover']);
 
     // Post Category
     Route::resource('admin/post-categories', PostCategoryController::class);

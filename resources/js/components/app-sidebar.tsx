@@ -12,6 +12,7 @@ import {
     LanguagesIcon,
     LayoutGrid,
     LayoutList,
+    Library,
     LucideIcon,
     LucideLink,
     MapPinHouseIcon,
@@ -116,7 +117,7 @@ const mainNavItems: {
             {
                 title: 'libraries',
                 url: '/admin/libraries',
-                icon: LayoutList,
+                icon: Library,
                 permission: 'banalai_library view',
             },
             {
