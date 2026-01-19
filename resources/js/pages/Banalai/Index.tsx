@@ -7,7 +7,7 @@ import { Head, usePage } from '@inertiajs/react';
 import BanalaiLayout from './Layout';
 
 const Index = () => {
-    const { BanalaiLibrary } = usePage<any>().props;
+    const { banalaiLibrary } = usePage<any>().props;
     const { website_info, app_url } = usePage<any>().props;
     const { t, currentLocale } = useTranslation();
 
@@ -39,7 +39,7 @@ const Index = () => {
             </Head>
             <HeroBanalai />
             <LibrarySearch />
-            <FeaturesSection features={BanalaiLibrary} />
+            <FeaturesSection features={banalaiLibrary} />
             <div className="mt-20">
                 <FreePlanSection />
             </div>

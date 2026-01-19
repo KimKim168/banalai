@@ -18,13 +18,13 @@ class BanalaiFrontPageController extends Controller
     {
 
         $hero = Page::where('code', 'home')->with('images')->first();
-        $BanalaiLibrary = BanalaiLibrary::orderBy('order_index')->limit('16')->get();
-        $hasMore = $BanalaiLibrary->count() > 15;
-
-        // return ($BanalaiLibrary);
+        $banalaiLibrary = BanalaiLibrary::orderBy('order_index')->limit(16)->get();
+        $hasMore = $banalaiLibrary->count() > 15;
+        $banalaiLibrary = $banalaiLibrary->take(15);
+        // return ($banalaiLibrary);
         return Inertia::render('Banalai/Index', [
             'hero' => $hero,
-            'BanalaiLibrary' => $BanalaiLibrary,
+            'banalaiLibrary' => $banalaiLibrary,
             'hasMore' => $hasMore,
         ]);
     }
@@ -81,12 +81,12 @@ class BanalaiFrontPageController extends Controller
     public function products(Request $request)
     {
         $productData = Page::where('code', 'products')->first();
-        $BanalaiLibrary = BanalaiLibrary::orderBy('order_index')->get();
+        $banalaiLibrary = BanalaiLibrary::orderBy('order_index')->get();
 
         // return ($productData);
         return Inertia::render('Banalai/Products', [
             'productData' => $productData,
-            'BanalaiLibrary' => $BanalaiLibrary,
+            'banalaiLibrary' => $banalaiLibrary,
         ]);
     }
     public function product_show(string $id)
