@@ -28,9 +28,11 @@ return new class extends Migration
 
             $table->string('link')->nullable();
             $table->string('icon')->nullable();
-
+            
             $table->unsignedBigInteger('total_views_count')->default(0);
             $table->integer('order_index')->default(100);
+            
+            $table->softDeletes();
             $table->timestamps();
         });
 
