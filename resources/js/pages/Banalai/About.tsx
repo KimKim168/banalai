@@ -8,7 +8,6 @@ import OurCoreValueData from '@/components/Banalai/OurCoreValueData';
 
 const About = () => {
     const { ourCoreValueData } = usePage<any>().props;
-    const { currentLocale } = useTranslation();
 
     return (
         <BanalaiLayout>

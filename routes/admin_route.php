@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BanalaiLibraryController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ItemCategoryController;
@@ -82,6 +83,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('admin/pages/images/{image}', [PageController::class, 'destroy_image']);
     Route::post('admin/pages/{page}/update', [PageController::class, 'update']);
     Route::post('admin/pages/{id}/recover', [PageController::class, 'recover']);
+    
+    // library
+    Route::resource('admin/libraries', BanalaiLibraryController::class);
+    // Route::delete('admin/pages/images/{image}', [PageController::class, 'destroy_image']);
+    // Route::post('admin/pages/{page}/update', [PageController::class, 'update']);
+    // Route::post('admin/pages/{id}/recover', [PageController::class, 'recover']);
 
     // Post Category
     Route::resource('admin/post-categories', PostCategoryController::class);

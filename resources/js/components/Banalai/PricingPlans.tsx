@@ -1,7 +1,9 @@
+import useTranslation from "@/hooks/use-translation";
 import { usePage } from "@inertiajs/react";
 
 const PricingPlans = () => {
     const { pricingtData } = usePage<any>().props;
+     const { currentLocale } = useTranslation();
 // Helper to convert code to readable text
 const formatCode = (code) => {
     if (!code) return "";
@@ -16,8 +18,8 @@ const formatCode = (code) => {
             <div className="mx-auto max-w-7xl">
                 {/* Header */}
                 <div className="mb-16 text-center">
-                    <h1 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">{pricingtData?.name}</h1>
-                    <p className="mx-auto max-w-2xl text-xl text-gray-600">{pricingtData?.short_description}</p>
+                    <h1 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">{currentLocale === 'kh' ? pricingtData?.name_kh || pricingtData?.name : pricingtData?.name}</h1>
+                    <p className="mx-auto max-w-2xl text-xl text-gray-600">{currentLocale === 'kh' ? pricingtData?.short_description_kh || pricingtData?.short_description : pricingtData?.short_description}</p>
                 </div>
 
                 {/* Pricing Cards */}
@@ -49,7 +51,7 @@ const formatCode = (code) => {
                             {/* Features from CKEditor HTML */}
                             <div
                                 className="mb-8 text-gray-600 prose"
-                                dangerouslySetInnerHTML={{ __html: plan.long_description }}
+                                dangerouslySetInnerHTML={{ __html: currentLocale === 'kh' ? plan?.long_description_kh || plan?.long_description : plan?.long_description }}
                             />
 
                             {/* Action Button */}
@@ -62,7 +64,7 @@ const formatCode = (code) => {
                                             : "bg-gray-100 text-gray-900 hover:bg-gray-200"
                                     }`}
                                 >
-                                    {plan.button_title}
+                                    {currentLocale === 'kh' ? plan?.button_title_kh || plan?.button_title : plan?.button_title}
                                 </a>
                             )}
                         </div>

@@ -1,7 +1,9 @@
+import useTranslation from "@/hooks/use-translation";
 import { usePage } from "@inertiajs/react";
 
 const FeatureComparison = () => {
-    const {featurePricingPlans} = usePage().props;
+    const {featurePricingPlans} = usePage<any>().props;
+    const { currentLocale } = useTranslation();
     // const FeatureComparisonTable = {
     //     long_description: `
     //   <div class="bg-white rounded-xl shadow-md overflow-hidden">
@@ -70,7 +72,7 @@ const FeatureComparison = () => {
         <div
             className="prose max-w-none pb-8 md:pb-20 prose-img:"
             dangerouslySetInnerHTML={{
-                __html: featurePricingPlans?.long_description,
+                __html: currentLocale === 'kh' ? featurePricingPlans?.long_description_kh || featurePricingPlans?.long_description : featurePricingPlans?.long_description
             }}
         /></div>
     );
