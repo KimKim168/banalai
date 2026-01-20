@@ -2,11 +2,10 @@ import useTranslation from '@/hooks/use-translation';
 import { Link, usePage } from '@inertiajs/react';
 
 const BanalaiFooter = () => {
-    const { media_links, website_info } = usePage<any>().props;
+    const { media_links, website_info, privacy_policy, terms_of_service, cookie_policy } = usePage<any>().props;
     const { t, currentLocale } = useTranslation();
     const mediaBgColors = ['hover:bg-indigo-600', 'hover:bg-blue-500', 'hover:bg-yellow-500', 'hover:bg-green-600'];
     const { url } = usePage();
-
     return (
         <footer className="bg-[linear-gradient(140deg,#101828,#1e2939,#101828)] text-gray-300">
             <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -63,7 +62,7 @@ const BanalaiFooter = () => {
                                             <span
                                                 className={`mr-2 h-1.5 w-1.5 rounded-full transition-opacity ${link.color} ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} `}
                                             ></span>
-                                              {t(link.name)}
+                                            {t(link.name)}
                                         </Link>
                                     </li>
                                 );
@@ -87,7 +86,7 @@ const BanalaiFooter = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-400">{t("Email")}</p>
+                                    <p className="text-sm text-gray-400">{t('Email')}</p>
                                     <a href="mailto:info@banalai.com" className="text-white transition-colors hover:text-indigo-400">
                                         {website_info?.email}
                                     </a>
@@ -119,7 +118,9 @@ const BanalaiFooter = () => {
                 <div className="border-t border-gray-700 pt-8">
                     <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
                         <div className="flex flex-col items-center space-y-2 md:flex-row md:space-y-0 md:space-x-4">
-                            <p className="text-sm text-gray-400">{currentLocale === 'kh' ? website_info?.copyright_kh || website_info?.copyright : website_info?.copyright}</p>
+                            <p className="text-sm text-gray-400">
+                                {currentLocale === 'kh' ? website_info?.copyright_kh || website_info?.copyright : website_info?.copyright}
+                            </p>
                             <p className="text-sm text-gray-500">
                                 Powered By:{' '}
                                 <a
@@ -133,14 +134,14 @@ const BanalaiFooter = () => {
                             </p>
                         </div>
                         <div className="flex gap-6 text-sm">
-                            <a href="#" className="text-gray-400 transition-colors hover:text-green-400">
-                                Privacy Policy
+                            <a href={`/privacy_policy`} className="text-gray-400 transition-colors hover:text-green-400">
+                                {currentLocale === 'kh' ? privacy_policy?.name_kh || privacy_policy?.name : privacy_policy?.name}
                             </a>
-                            <a href="#" className="text-gray-400 transition-colors hover:text-yellow-400">
-                                Terms of Service
+                            <a href={`/terms_of_service`} className="text-gray-400 transition-colors hover:text-yellow-400">
+                                {currentLocale === 'kh' ? terms_of_service?.name_kh || terms_of_service?.name : terms_of_service?.name}
                             </a>
-                            <a href="#" className="text-gray-400 transition-colors hover:text-indigo-400">
-                                Cookie Policy
+                            <a href={`/cookie_policy`} className="text-gray-400 transition-colors hover:text-indigo-400">
+                                {currentLocale === 'kh' ? cookie_policy?.name_kh || cookie_policy?.name : cookie_policy?.name}
                             </a>
                         </div>
                     </div>

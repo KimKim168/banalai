@@ -18,14 +18,40 @@ class BanalaiFrontPageController extends Controller
     {
 
         $hero = Page::where('code', 'home')->with('images')->first();
+        $bottom = Page::where('code', 'home-bottom')->first();
         $banalaiLibrary = BanalaiLibrary::orderBy('order_index')->limit(16)->get();
         $hasMore = $banalaiLibrary->count() > 15;
         $banalaiLibrary = $banalaiLibrary->take(15);
         // return ($banalaiLibrary);
         return Inertia::render('Banalai/Index', [
             'hero' => $hero,
+            'bottom' => $bottom,
             'banalaiLibrary' => $banalaiLibrary,
             'hasMore' => $hasMore,
+        ]);
+    }
+    public function privacy_policy()
+    {
+        $data = Page::where('code', 'privacy-policy')->first();
+        // return ($banalaiLibrary);
+        return Inertia::render('Banalai/PrivacyPolicy', [
+            'data' => $data,
+        ]);
+    }
+    public function terms_of_service()
+    {
+        $data = Page::where('code', 'terms-of-service')->first();
+        // return ($banalaiLibrary);
+        return Inertia::render('Banalai/TermsOfService', [
+            'data' => $data,
+        ]);
+    }
+    public function cookie_policy()
+    {
+        $data = Page::where('code', 'cookie-policy')->first();
+        // return ($banalaiLibrary);
+        return Inertia::render('Banalai/CookiePolicy', [
+            'data' => $data,
         ]);
     }
 
@@ -47,12 +73,15 @@ class BanalaiFrontPageController extends Controller
 
         $aboutHeader = Page::where('code', 'about')->first();
         $ourStory = Page::where('code', 'our-story')->first();
+        $bottom = Page::where('code', 'about-bottom')->first();
+
         // return $ourMission;
         return Inertia::render('Banalai/About', [
             'aboutHeader' => $aboutHeader,
             'ourMission' => $ourMission,
             'ourStory' => $ourStory,
             'ourCoreValueData' => $ourCoreValueData,
+            'bottom' => $bottom,
         ]);
     }
     public function support()
@@ -81,11 +110,13 @@ class BanalaiFrontPageController extends Controller
     public function products(Request $request)
     {
         $productData = Page::where('code', 'products')->first();
+        $bottom = Page::where('code', 'product-bottom')->first();
         $banalaiLibrary = BanalaiLibrary::all();
 
         // return ($productData);
         return Inertia::render('Banalai/Products', [
             'productData' => $productData,
+            'bottom' => $bottom,
             'banalaiLibrary' => $banalaiLibrary,
         ]);
     }

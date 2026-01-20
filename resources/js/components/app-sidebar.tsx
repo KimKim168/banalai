@@ -115,7 +115,7 @@ const mainNavItems: {
                 permission: 'website_info view',
             },
             {
-                title: 'libraries',
+                title: 'Libraries',
                 url: '/admin/libraries',
                 icon: Library,
                 permission: 'banalai_library view',

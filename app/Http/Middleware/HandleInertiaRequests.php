@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Link;
+use App\Models\Page;
 use App\Models\PostCategory;
 use App\Models\WebsiteInfo;
 use Illuminate\Foundation\Inspiring;
@@ -73,6 +74,9 @@ class HandleInertiaRequests extends Middleware
             'post_categories' => PostCategory::orderBy('order_index')->orderBy('name')->get(),
             'active_category_code' => $active_category_code,
             'selected_category' => PostCategory::where('code', $active_category_code)->first(),
+            'privacy_policy' => Page::where('code', 'privacy-policy')->first(),
+            'terms_of_service' => Page::where('code', 'terms-of-service')->first(),
+            'cookie_policy' => Page::where('code', 'cookie-policy')->first(),
         ];
     }
 }
