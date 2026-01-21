@@ -17,7 +17,6 @@ import {
     LucideLink,
     MapPinHouseIcon,
     SchoolIcon,
-    SettingsIcon,
     ShapesIcon,
     UsersIcon,
 } from 'lucide-react';
@@ -108,30 +107,30 @@ const mainNavItems: {
             },
         ],
     },
-     {
-                title: 'Website Info',
-                url: '/admin/website-infos',
-                icon: Globe,
-                permission: 'website_info view',
-            },
-            {
-                title: 'Libraries',
-                url: '/admin/libraries',
-                icon: Library,
-                permission: 'banalai_library view',
-            },
-            {
-                title: 'Pages',
-                url: '/admin/pages',
-                icon: LayoutList,
-                permission: 'page view',
-            },
-            {
-                title: 'Links',
-                url: '/admin/links',
-                icon: LucideLink,
-                permission: 'link view',
-            },
+    {
+        title: 'Website Info',
+        url: '/admin/website-infos',
+        icon: Globe,
+        permission: 'website_info view',
+    },
+    {
+        title: 'Libraries',
+        url: '/admin/libraries',
+        icon: Library,
+        permission: 'banalai_library view',
+    },
+    {
+        title: 'Pages',
+        url: '/admin/pages',
+        icon: LayoutList,
+        permission: 'page view',
+    },
+    {
+        title: 'Links',
+        url: '/admin/links',
+        icon: LucideLink,
+        permission: 'link view',
+    },
     // {
     //     title: 'Website Settings',
     //     url: '/admin/website-infos',
