@@ -11,7 +11,7 @@
         return (
             <section className="mt-4 bg-white px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-7xl">
-                    <p className="mb-4 font-semibold text-gray-900">{t('One search. Unlimited knowledge.')}</p>
+                    <p className="mb-4 font-semibold text-gray-900">{t('Partner libraries using our services')}</p>
                     <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-8">
                         {features?.map((item, index) => (
                             <a
