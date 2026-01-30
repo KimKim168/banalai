@@ -2,12 +2,12 @@ import { Button } from '@/components/ui/button';
 import useTranslation from '@/hooks/use-translation';
 import { cn } from '@/lib/utils';
 import { router } from '@inertiajs/react';
+import { useEffect } from 'react';
 
 const NavLanguage = ({ buttonClassName = '' }) => {
     const { currentLocale } = useTranslation();
 
-    // ✅ frontend safety fallback
-    const locale = currentLocale || 'kh';
+    const locale = currentLocale ?? 'kh'; // ✅ Khmer default
 
     const switchLang = (lang: string) => {
         router.visit(`/lang/${lang}`, {
@@ -31,11 +31,7 @@ const NavLanguage = ({ buttonClassName = '' }) => {
                     buttonClassName,
                 )}
             >
-                <img
-                    src="/assets/icons/flags/kh.png"
-                    alt="KH"
-                    className="h-full w-full object-cover"
-                />
+                <img src="/assets/icons/flags/kh.png" alt="KH" className="h-full w-full object-cover" />
             </Button>
 
             <Button
@@ -49,11 +45,7 @@ const NavLanguage = ({ buttonClassName = '' }) => {
                     buttonClassName,
                 )}
             >
-                <img
-                    src="/assets/icons/flags/uk.png"
-                    alt="EN"
-                    className="h-full w-full object-cover"
-                />
+                <img src="/assets/icons/flags/uk.png" alt="EN" className="h-full w-full object-cover" />
             </Button>
         </div>
     );
