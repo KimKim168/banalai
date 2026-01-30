@@ -14,7 +14,7 @@ const LibrarySearch = ({ debounceSearch = true }: LibrarySearchProps) => {
     const initialQueryParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
     const [search, setSearch] = useState(initialQueryParams.get('search') || '');
     const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
-    const isOnLibrariesPage = currentPath === '/libraries';
+    const isOnLibrariesPage = currentPath === '/products';
 
     // Only debounce if enabled
     const debouncedSearch = useCallback(
@@ -39,7 +39,7 @@ const LibrarySearch = ({ debounceSearch = true }: LibrarySearchProps) => {
         } else {
             const queryParams = new URLSearchParams();
             if (search) queryParams.set('search', search);
-            router.get(`/libraries?${queryParams.toString()}`);
+            router.get(`/products?${queryParams.toString()}`);
         }
     };
 

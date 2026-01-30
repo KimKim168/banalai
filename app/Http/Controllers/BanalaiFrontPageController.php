@@ -109,17 +109,28 @@ class BanalaiFrontPageController extends Controller
 
     public function products(Request $request)
     {
+        $search = $request->input('search', '');
+
         $productData = Page::where('code', 'products')->first();
         $bottom = Page::where('code', 'product-bottom')->first();
-        $banalaiLibrary = BanalaiLibrary::all();
 
-        // return ($productData);
+        $query = BanalaiLibrary::query();
+
+        if ($search) {
+            $query->where(function ($subQuery) use ($search) {
+                $subQuery->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('short_description', 'LIKE', "%{$search}%");
+            });
+        }
+
         return Inertia::render('Banalai/Products', [
             'productData' => $productData,
             'bottom' => $bottom,
-            'banalaiLibrary' => $banalaiLibrary,
+            'banalaiLibrary' => $query->get(), // ✅ execute query
+            'search' => $search, // optional but recommended
         ]);
     }
+
     public function product_show(string $id)
     {
         $showData = BanalaiLibrary::find($id);
