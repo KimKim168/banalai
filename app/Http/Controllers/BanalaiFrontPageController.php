@@ -133,7 +133,7 @@ class BanalaiFrontPageController extends Controller
 
     public function product_show(string $id)
     {
-        $showData = BanalaiLibrary::find($id);
+        $showData = Page::find($id);
         // return ($showData);
         return Inertia::render('Banalai/Show', [
             'showData' => $showData,
