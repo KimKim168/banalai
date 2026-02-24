@@ -1,3 +1,4 @@
+import useTranslation from "@/hooks/use-translation";
 import { Link, usePage } from "@inertiajs/react";
 
 const imgBgColors = [
@@ -8,8 +9,9 @@ const imgBgColors = [
 ];
 
 export default function ProductsSection() {
-    const { productData, banalaiLibrary } = usePage<any>().props;
-
+    const { productData } = usePage<any>().props;
+    const { t, currentLocale } = useTranslation();
+    
     return (
         <section className="px-4 pt-32 pb-20 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">
@@ -17,17 +19,17 @@ export default function ProductsSection() {
                 {/* Section Header */}
                 <div className="mb-16 text-center">
                     <h1 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-                        {productData?.name}
+                        {currentLocale === 'kh' ? productData?.name_kh || productData?.name : productData?.name}
                     </h1>
 
                     <p className="mx-auto max-w-2xl text-xl text-gray-600">
-                        {productData?.short_description}
+                        {currentLocale === 'kh' ? productData?.short_description_kh || productData?.short_description : productData?.short_description}
                     </p>
                 </div>
 
                 {/* Products */}
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                    {banalaiLibrary?.map((item, index) => (
+                    {productData?.children?.map((item, index) => (
                         <Link
                             key={item?.id}
                             href={`/product/${item?.id}`}
@@ -50,7 +52,7 @@ export default function ProductsSection() {
                             </h3>
 
                             {/* Short Description */}
-                            <p className="mb-4 text-gray-600" dangerouslySetInnerHTML={{__html:item?.short_description}}>
+                            <p className="mb-4 text-gray-600" dangerouslySetInnerHTML={{__html:currentLocale === 'kh' ? item?.short_description_kh || item?.short_description : item?.short_description}}>
                             </p>
 
                             {/* Long Description (CKEditor HTML) */}
@@ -58,7 +60,7 @@ export default function ProductsSection() {
                                 <div
                                     className="prose max-w-none prose-p:my-0 line-clamp-6 max-h-[7.5em]"
                                     dangerouslySetInnerHTML={{
-                                        __html: item?.long_description
+                                        __html: currentLocale === 'kh' ? item?.long_description_kh || item?.long_description : item?.long_description
                                     }}
                                 />
                             )}

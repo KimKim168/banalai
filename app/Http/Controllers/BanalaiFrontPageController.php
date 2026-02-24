@@ -111,7 +111,7 @@ class BanalaiFrontPageController extends Controller
     {
         $search = $request->input('search', '');
 
-        $productData = Page::where('code', 'products')->first();
+        $productData = Page::where('code', 'products')->with('children.images')->first();
         $bottom = Page::where('code', 'product-bottom')->first();
 
         $query = BanalaiLibrary::query();
@@ -122,7 +122,7 @@ class BanalaiFrontPageController extends Controller
                     ->orWhere('short_description', 'LIKE', "%{$search}%");
             });
         }
-
+        // return $productData;
         return Inertia::render('Banalai/Products', [
             'productData' => $productData,
             'bottom' => $bottom,
