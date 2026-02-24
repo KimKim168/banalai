@@ -40,7 +40,7 @@ export default function ProductsSection() {
                                 className={`mb-4 flex h-16 w-16 items-center justify-center rounded-lg`}
                             >
                                 <img
-                                    src={`/assets/images/banalai_library/${item?.icon}`}
+                                    src={`/assets/images/pages/thumb/${item?.icon}`}
                                     alt={item?.name}
                                     className="h-full w-full object-contain"
                                 />
@@ -48,7 +48,7 @@ export default function ProductsSection() {
 
                             {/* Title */}
                             <h3 className="mb-3 text-2xl font-semibold text-gray-900">
-                                {item?.name}
+                                {currentLocale === 'kh' ? item?.name_kh || item?.name : item?.name}
                             </h3>
 
                             {/* Short Description */}
